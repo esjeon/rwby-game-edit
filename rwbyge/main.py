@@ -74,6 +74,25 @@ def save_json(path, profile):
 def save(user_id, profile):
     save_json(PROFILE_PATH.format(user=user_id), profile)
 
+
+def add_upgrade(profile, character_name, upgrade_name):
+    character_id = CHARACTER_IDS[character_name]
+    character = profile['Characters'][character_id]
+    upgrades = character['PurchasedUpgrades'] # type: list
+
+    if upgrade_name in SKILL_IDS['general']:
+        upgrade = SKILL_IDS['general'][upgrade_name]
+    else:
+        upgrade = SKILL_IDS[character_name][upgrade_name]
+
+    upgrades.append(upgrade)
+
+def max_experience(profile, character_name):
+    character_id = CHARACTER_IDS[character_name]
+    character = profile['Characters'][character_id]
+    character['Experience'] = EXPERIENCE_MAX
+
+
 def ruby_full(profile):
     ruby = CHARACTER_IDS['ruby']
     character = profile['Characters'][ruby]
@@ -97,11 +116,26 @@ def ruby_full(profile):
     for name in upgrade_add:
         upgrades.append(SKILL_IDS['ruby'][name])
 
+def weiss_full(profile):
+    weiss = 'weiss'
+    max_experience(profile, weiss)
+
+    upgrades = [
+        'Medic',
+        'Special 1',
+        'Ice Queen',
+        'Perfect Form',
+        'Improved Barrage',
+        'Hypothermia',
+    ]
+    for upgrade in upgrades:
+        add_upgrade(profile, weiss, upgrade)
+
 
 def main():
     user = 52604688
     profile = load(user)
-    ruby_full(profile)
+    weiss_full(profile)
     save(user, profile)
 
 

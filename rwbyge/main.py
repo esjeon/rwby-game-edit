@@ -43,6 +43,20 @@ SKILL_IDS = {
         'Crescendo Forte'   : 'Ruby6976',
         'Crescendo Finale'  : 'Ruby8418',
     },
+
+    'weiss': {
+        'Ice Queen'         : 'Weis10ef',
+        'Perfect Form'      : 'Weisc8c0',
+        # tree: 'Barrage'           : 'Weisf98f',
+        'Improved Barrage'  : 'Weis888f',
+        'Frost Bolt'        : 'Weisd6c7',
+        # tree: 'Frostbite'         : 'Weise63e',
+        'Improved Frostbite': 'Weisc662',
+        'Hypothermia'       : 'Weisd758',
+        # tree: 'Nova'              : 'Weise0fd',
+        'Improved Nova'     : 'Weis34d3',
+        'Novacaine'         : 'Weis3bf7',
+    }
 }
 
 def load(user_id):

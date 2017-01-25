@@ -19,13 +19,13 @@ CHARACTER_IDS = {
 SKILL_IDS = {
     'general': {
         # 7 of 7
-        'Health'            : 'Gene44ef',
-        'Heavy Team Attack' : 'Gene77e7',
+        'Survivor'          : 'Gene44ef',
+        'Aura Regeneration' : 'Genec877',
+        'Improve Ultimate 1': 'Gene51be',
         'Medic'             : 'Gene1af2',
-        'Shield Increase'   : 'Gene3084',
-        'Shield Regen'      : 'Genec877',
-        'Speical 1'         : 'Gene51be',
-        'Special 2'         : 'Geneea9f',
+        'Increased Aura'    : 'Gene3084',
+        'Improve Ultimate 2': 'Geneea9f',
+        'Heavy Synergy'     : 'Gene77e7',
     },
 
     'ruby': {
@@ -75,6 +75,11 @@ def save(user_id, profile):
     save_json(PROFILE_PATH.format(user=user_id), profile)
 
 
+def reset_upgrade(profile, character_name):
+    character_id = CHARACTER_IDS[character_name]
+    character = profile['Characters'][character_id]
+    character['PurchasedUpgrades'] = []
+
 def add_upgrade(profile, character_name, upgrade_name):
     character_id = CHARACTER_IDS[character_name]
     character = profile['Characters'][character_id]
@@ -122,12 +127,14 @@ def weiss_full(profile):
 
     upgrades = [
         'Medic',
-        'Special 1',
+        'Improve Ultimate 1',
         'Ice Queen',
         'Perfect Form',
         'Improved Barrage',
         'Hypothermia',
+        'Novacaine'
     ]
+    reset_upgrade(profile, weiss)
     for upgrade in upgrades:
         add_upgrade(profile, weiss, upgrade)
 

@@ -1,5 +1,5 @@
 
-import json
+ import json
 
 PROFILE_PATH = "C:\\Program Files (x86)\\Steam\\userdata\\{user}\\418340\\remote\\RWBY.SteamCloud.Profile.json"
 EXPERIENCE_MAX = 15250
@@ -10,7 +10,7 @@ CHARACTER_IDS = {
     'weiss' : 'Weis9ad1',
     'yang'  : 'Yangcde5',
     'jaun'  : 'Jaun5986',
-    'norah' : 'Noracf67',
+    'nora'  : 'Noracf67',
     'pyrrah': 'Pyrrfad9',
     'ren'   : 'Ren 7bb0'
 }
@@ -56,7 +56,22 @@ SKILL_IDS = {
         # tree: 'Nova'              : 'Weise0fd',
         'Improved Nova'     : 'Weis34d3',
         'Novacaine'         : 'Weis3bf7',
-    }
+    },
+
+    'nora': {
+        'Lightning Chain'   : 'Norac00b',
+        'Charging Up'       : 'Noraa4b4',
+        # tree: 'Missle Barrage'    : 'Noraee09',
+        'Upgraded Grenade'  : 'Noraee24',
+        'Mine Grenade'      : 'Nora06b8',
+        'Electric Grenade'  : 'Nora88cf',
+        # tree: 'Blast Wave'        : 'Norabe3a',
+        'Improved Blast Wave':'Norabf3d',
+        'Earth Wave'        : 'Noradaf5',
+        # tree: 'Quake'             : 'Nora19c3',
+        'Improved Quake'    : 'Nora8e09',
+        'Super Quake'       : 'Nora3c41',
+    },
 }
 
 def load(user_id):
@@ -138,11 +153,27 @@ def weiss_full(profile):
     for upgrade in upgrades:
         add_upgrade(profile, weiss, upgrade)
 
+def nora_full(profile):
+    nora = 'nora'
+    max_experience(profile, nora)
+
+    for upgrade in [
+        'Lightning Chain',
+        'Electric Grenade',
+        'Earth Wave',
+        'Super Quake',
+        'Improve Ultimate 1',
+        'Aura Regeneration',
+        'Charging Up',
+    ]:
+        add_upgrade(profile, nora, upgrade)
+
 
 def main():
     user = 52604688
     profile = load(user)
     weiss_full(profile)
+    nora_full(profile)
     save(user, profile)
 
 
